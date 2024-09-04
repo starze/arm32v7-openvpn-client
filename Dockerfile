@@ -1,5 +1,7 @@
 FROM arm32v7/debian:latest
-MAINTAINER Daniel Starzmann <daniel@starze.de>
+
+LABEL org.opencontainers.image.authors="Daniel Starzmann <daniel@starze.de>"
+LABEL org.opencontainers.image.url="https://github.com/starze/arm32v7-openvpn-client"
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive \
     apt-get install -yq openvpn && \
@@ -7,5 +9,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive \
 
 VOLUME /config
 
-ENTRYPOINT /usr/sbin/openvpn --config /config/client.ovpn 
+ENTRYPOINT ["/usr/sbin/openvpn"]
+CMD ["--config", "/config/client.ovpn"]
 
